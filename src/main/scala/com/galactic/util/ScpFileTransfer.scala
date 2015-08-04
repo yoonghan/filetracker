@@ -13,7 +13,11 @@ object ScpFileTransfer {
   
   def scp(filesToCopy:Array[FileProp], index:Int) {
     if(session.isConnected() == false){
-      session.disconnect()
+      try{
+        session.disconnect()
+      }catch{
+        case e:Exception => //do nothing
+      }
       session.connect()
     }
     copyFile(session, filesToCopy, PropertyReader.getServerPath(index)) 

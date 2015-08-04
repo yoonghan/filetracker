@@ -18,13 +18,14 @@ class FileReader(folder:String) {
       System.exit(-1)
     }
     
-    val files = file.listFiles()
+    val files = file.listFiles().filter { file => file.isFile() }
     if(files == null || files.length == 0){
       System.err.println("Folder path " + folder + " has nothing to monitor")
       System.exit(-1)
     }
     
-    val result  = files.map(file => FileProp(file.getName(), file.getAbsolutePath(), file.lastModified()))
+    val result  = files
+                  .map(file => FileProp(file.getName(), file.getAbsolutePath(), file.lastModified()))
     
     result
   }

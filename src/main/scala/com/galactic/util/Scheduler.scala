@@ -28,7 +28,7 @@ class Scheduler(index:Int) {
   
   def trackMemory(){
     val runtime = Runtime.getRuntime();
-    system.scheduler.schedule(0.seconds, 1.minutes){println("Allocated memory of: " + runtime.totalMemory()/1024/1024 +"MB")}
+    system.scheduler.schedule(0.seconds, 5.minutes){println("Free memory with: " + runtime.freeMemory()/1024/1024 +"MB")}
   }
   
   private def monitorChanges(filesToMonitor:Array[FileProp]){
