@@ -5,14 +5,12 @@
 Make sure java 7 or above is installed. JRE version will be just fine.
 
 ##INSTRUCTIONS
-***
 1. Copy file filetracker folder/ to you desktop
 2. Configure conf/configuration.properties to point the correct folders you need to monitor.
 3. Double-click or run executor.bat
 
 
 ##CONFIGURATION
-***
 Configuration as of table below:
 
 Property           | Description |
@@ -25,7 +23,6 @@ server.path.[index]| Once client file changes it detects, it copies to the serve
 client.path.[index]| Folder to be monitored for new files and modified files |
 
 ##TROUBLESHOOT
-***
 1. Application normally end with world - i.e. just dies
 2. Common errors includes :
 
