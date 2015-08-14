@@ -47,10 +47,10 @@ object ScpFileTransfer {
           while(c != '\n');
             
           if(b==1) { // error
-            print(sb.toString());
+            Log.errorLog("Unable to write, check server path exist.");
           }
           if(b==2){ // fatal error
-            print(sb.toString());
+            Log.errorLog("Unable to write, check server path exist.");
           }
         }
         return b;
@@ -82,7 +82,7 @@ object ScpFileTransfer {
         channel.connect()
         
         if(checkAck(in)!=0){
-          println("NO");
+          Log.errorLog("Not acknowledged to connect to host server.");
         }
         
         val file = new File(eachFile.fileNameWithPath)
@@ -99,15 +99,16 @@ object ScpFileTransfer {
         out.flush()
         
         if(checkAck(in)!=0){
-          println("NO");
+          Log.errorLog("Unable to get acknowlegement and connection from server.");
         }
         
         out.close()
+        in.close()
         
         channel.disconnect()
       }
     }catch{
-      case e:Exception =>e.printStackTrace() 
+      case e:Exception => Log.errorThrowableLog(e.getCause())
     }
   }
   
@@ -120,10 +121,10 @@ object ScpFileTransfer {
     val config = PropertyReader.getJschConfiguration
     session.setConfig(config)
     try{
-        println("Connection to :"+serverIp)
+        Log.infoLog("Connection to :"+serverIp)
         session.connect
     }catch{
-      case e: Exception => e.printStackTrace();
+      case e: Exception => Log.errorThrowableLog(e.getCause())
     }
     return session    
   }

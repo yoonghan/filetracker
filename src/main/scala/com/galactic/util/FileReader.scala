@@ -14,13 +14,13 @@ class FileReader(folder:String) {
     val file = new File(folder)
     
     if(!file.isDirectory() || !file.exists()){
-      System.err.println("Folder path " + folder + " does not exist/is not a folder. Please check")
+      Log.errorLog("Folder path " + folder + " does not exist/is not a folder. Please check")
       System.exit(-1)
     }
     
     val files = file.listFiles().filter { file => file.isFile() }
     if(files == null || files.length == 0){
-      System.err.println("Folder path " + folder + " has nothing to monitor")
+      Log.errorLog("Folder path " + folder + " has nothing to monitor")
       System.exit(-1)
     }
     

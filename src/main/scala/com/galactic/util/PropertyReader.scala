@@ -21,7 +21,7 @@ object PropertyReader {
       input.close()
     }catch{
       case e:Exception => {
-        System.err.println("Missing configuration file >> " + fileName)
+        Log.errorLog("Missing configuration file >> " + fileName)
         System.exit(-1)        
       }
     }
@@ -39,7 +39,7 @@ object PropertyReader {
   private def getProperty(key:String):String = {
     val value= propConfig.getProperty(key)
     if(value == null || value.isEmpty()){
-      System.err.println("Please check configuration file, prop:" + key + "is not found")
+      Log.errorLog("Please check configuration file, prop:" + key + "is not found")
       System.exit(-1)
     }
     return value
@@ -55,7 +55,7 @@ object PropertyReader {
     }
     
     if (index < 0 ){
-      System.err.println("Config index must be non negative")
+      Log.errorLog("Config index must be non negative")
       System.exit(-1)
       -1
     }else{
@@ -78,7 +78,7 @@ object PropertyReader {
          1025
        }
       }catch{
-        case e:NumberFormatException => System.err.println("Invalid port provided, default value");1025
+        case e:NumberFormatException => Log.errorLog("Invalid port provided, default value");1025
       }
     
     return port;

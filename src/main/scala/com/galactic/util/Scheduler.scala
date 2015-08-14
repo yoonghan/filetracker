@@ -14,7 +14,7 @@ class Scheduler(index:Int) {
   
   //set all the time
   val system = ActorSystem("Scheduler")
-  val init = 5.seconds
+  val init = 2.seconds
   
   def readFiles():Array[FileProp] = {
     val fileReader = new FileReader(PropertyReader.getClientPath(index))
@@ -28,14 +28,14 @@ class Scheduler(index:Int) {
   
   def trackMemory(){
     val runtime = Runtime.getRuntime();
-    system.scheduler.schedule(0.seconds, 5.minutes){println("Free memory with: " + runtime.freeMemory()/1024/1024 +"MB")}
+    system.scheduler.schedule(0.seconds, 5.minutes){Log.infoLog("Free memory with: " + runtime.freeMemory()/1024/1024 +"MB")}
   }
   
   private def monitorChanges(filesToMonitor:Array[FileProp]){
     val listOfFiles = checkChanges(filesToMonitor)
     
     if(! listOfFiles._1.isEmpty){
-      println("Changes found to:[" + listOfFiles._1.mkString(",") + "]")
+      Log.infoLog("Changes found to:[" + listOfFiles._1.mkString(",") + "]")
       ScpFileTransfer.scp(listOfFiles._1, index)
     }
     

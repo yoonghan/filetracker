@@ -7,6 +7,7 @@ import akka.pattern.ask
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._
 import akka.util.Timeout
+import com.galactic.util.Log
 
 /**
  * @author HAYOONG
@@ -32,7 +33,7 @@ object Application {
       }
     }catch{
       case e:Exception => {
-        System.err.println("Similar service has been started. Exiting.");
+        Log.errorLog("Similar service has been started. Exiting.");
         System.exit(-1)
       }
     } 

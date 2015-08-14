@@ -10,5 +10,7 @@ resolvers += "Local Maven Repository" at Path.userHome.asFile.toURI.toURL + ".m2
 
 libraryDependencies ++= Seq(
   "com.typesafe.akka" % "akka-actor_2.11" % "2.4-M2",
-  "com.jcraft" % "jsch" % "0.1.53"
+  "com.jcraft" % "jsch" % "0.1.53",
+  "org.slf4j" % "slf4j-api" % "1.7.12",
+  "ch.qos.logback" % "logback-classic" % "1.1.3"
 )
