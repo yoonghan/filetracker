@@ -21,6 +21,10 @@ connect.password   | VM box password, default is root for everyone's VM |
 config.index       | To determine how many [server.path] and [client.path] to be monitored. Index of [*.path.*] starts from 0 |
 server.path.[index]| Once client file changes it detects, it copies to the server |
 client.path.[index]| Folder to be monitored for new files and modified files |
+livereload| Enable live reload, however pages must contain the javascript 
+
+##Markup for live reload
+```document.write('<script src="http://' + ('localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')```
 
 ##TROUBLESHOOT
 1. Application normally end with world - i.e. just dies
