@@ -12,5 +12,8 @@ libraryDependencies ++= Seq(
   "com.typesafe.akka" % "akka-actor_2.11" % "2.4-M2",
   "com.jcraft" % "jsch" % "0.1.53",
   "org.slf4j" % "slf4j-api" % "1.7.12",
-  "ch.qos.logback" % "logback-classic" % "1.1.3"
+  "ch.qos.logback" % "logback-classic" % "1.1.3",
+  "io.netty" % "netty-codec-http" % "4.0.24.Final",
+  "io.netty" % "netty-transport" % "4.0.24.Final",
+  "com.github.alexvictoor" % "netty-livereload" % "0.1"
 )
