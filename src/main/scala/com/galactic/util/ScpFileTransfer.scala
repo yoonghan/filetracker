@@ -60,14 +60,17 @@ object ScpFileTransfer {
       val fis = new FileInputStream(file)
       val buf = new Array[Byte](1024)
       
-      while(true){
-        val len = fis.read(buf, 0, buf.length)
-        if(len <= 0)
-          return
-        out.write(buf, 0, len)
+      try{
+        while(true){
+          val len = fis.read(buf, 0, buf.length)
+          if(len <= 0){
+            return
+          }
+          out.write(buf, 0, len)
+        }
+      }finally{
+        fis.close()
       }
-      
-      fis.close()
     }
     
     try{

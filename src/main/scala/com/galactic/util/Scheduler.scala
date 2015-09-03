@@ -5,12 +5,13 @@ import scala.concurrent.duration._
 import com.galactic.bean._
 import java.io._
 import com.galactic.util._
-
 import scala.concurrent.ExecutionContext.Implicits.global
+import com.github.alexvictoor.livereload.Broadcaster
+
 /**
  * @author HAYOONG
  */
-class Scheduler(index:Int) {
+class Scheduler(index:Int, broadcaster:Option[Broadcaster]) {
   
   //set all the time
   val system = ActorSystem("Scheduler")
@@ -23,7 +24,7 @@ class Scheduler(index:Int) {
   }
   
   def start(){
-    system.scheduler.scheduleOnce(init){monitorChanges(readFiles())}
+    system.scheduler.scheduleOnce(init){monitorChanges(readFiles())}    
   }
   
   def trackMemory(){
@@ -37,6 +38,10 @@ class Scheduler(index:Int) {
     if(! listOfFiles._1.isEmpty){
       Log.infoLog("Changes found to:[" + listOfFiles._1.mkString(",") + "]")
       ScpFileTransfer.scp(listOfFiles._1, index)
+      
+      if(broadcaster.isDefined) {
+        broadcaster.get.onFileChanged("/")
+      }
     }
     
     system.scheduler.scheduleOnce(init){monitorChanges(listOfFiles._2)}

@@ -66,6 +66,15 @@ object PropertyReader {
   def getClientPath(index:Int) = getProperty("client.path."+index)
   def getConnectUserName() = getProperty("connect.username")
   def getConnectPassword() = getProperty("connect.password")
+  def getIsLiveReload() = {
+    val isLiveReload = getProperty("config.livereload")
+    if("1".equals(isLiveReload)) {
+      true
+    }
+    else {
+      false
+    }
+  }
   
   def getSocketPort():Int = {
     val port = 
